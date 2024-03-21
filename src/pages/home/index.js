@@ -6,6 +6,7 @@ import { ActionBar, AddFormSection, CardsListSection, ListTitle, MainContainer, 
 
 const Home = () => {
     const [todoData, setTodoData] = useState([])
+    const [backupTodoData, setBackupTodoData] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => { 
@@ -13,6 +14,7 @@ const Home = () => {
             .then((res) => res.json())
             .then((result) => {
                 setTodoData(result);
+                setBackupTodoData(result)
                 setLoading(false)
             })
             .catch((err) => {
@@ -34,6 +36,20 @@ const Home = () => {
         e.preventDefault()
     }
 
+    const handleFilterApplied = (e, searchText, status) => {
+        let data = backupTodoData;
+        if(searchText || status){
+            if(searchText){
+                data = backupTodoData?.filter((todo) => todo?.title?.toLowerCase().includes(searchText?.toLowerCase()))
+            }
+            if(status){ 
+                data = data?.filter((todo) => status === todo?.completed?.toString())
+            }
+        }
+        setTodoData(data);
+        e.preventDefault()
+    }
+
     if(loading) return <span style={{color:"red"}}>Loading...</span>
 
     return (
@@ -43,7 +59,7 @@ const Home = () => {
                     <AddForm handleAdd={handleAdd}/>
                 </AddFormSection>
                 <SearchControllSection>
-                    <FilterForm/>
+                    <FilterForm handleFilterApplied={handleFilterApplied}/>
                 </SearchControllSection>
             </ActionBar>
             <>
