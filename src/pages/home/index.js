@@ -1,5 +1,7 @@
 import React from "react";
-const AddForm = React.lazy(() => import("addForm/index"));
+const AddForm = React.lazy(() => import("addForm/addForm"));
+const FilterForm = React.lazy(() => import("filterSection/filterSection"));
+const List = React.lazy(() => import("list/list"));
 import { ActionBar, AddFormSection, CardsListSection, ListTitle, MainContainer, SearchControllSection } from "./style";
 
 const Home = () => {
@@ -11,13 +13,13 @@ const Home = () => {
                     <AddForm/>
                 </AddFormSection>
                 <SearchControllSection>
-                    {/* Here comes the search controlls */}
+                    <FilterForm/>
                 </SearchControllSection>
             </ActionBar>
             <>
                 <ListTitle>Todo List :</ListTitle>
                 <CardsListSection>
-                    {/* Here comes the cards list */}
+                    <List/>
                 </CardsListSection>
             </>
         </MainContainer>

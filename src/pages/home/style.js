@@ -7,7 +7,7 @@ export const MainContainer = styled.div`
 
 export const ActionBar = styled.div`
     display: flex;
-    height: 30vh;
+    height: 35vh;
     align-items: center;
 `
 
@@ -16,7 +16,7 @@ export const AddFormSection = styled.div`
     align-items: center;
     border: 2px solid white;
     width: 50%;
-    height: 26vh;
+    height: 33vh;
 `
 
 export const SearchControllSection = styled.div`
@@ -24,7 +24,7 @@ export const SearchControllSection = styled.div`
     align-items: center;
     border: 2px solid white;
     width: 50%;
-    height: 26vh;
+    height: 33vh;
 `
 export const ListTitle = styled.h2`
     color: white;
