@@ -1,3 +1,4 @@
+import React from 'react';
 import { DetailsContainer, DetailsHeader } from "./style"
 
 const TodoDetails = () => {

@@ -1,3 +1,5 @@
+import React from "react";
+const AddForm = React.lazy(() => import("addForm/index"));
 import { ActionBar, AddFormSection, CardsListSection, ListTitle, MainContainer, SearchControllSection } from "./style";
 
 const Home = () => {
@@ -6,7 +8,7 @@ const Home = () => {
         <MainContainer>
             <ActionBar>
                 <AddFormSection>
-                    {/* Here comes the add form */}
+                    <AddForm/>
                 </AddFormSection>
                 <SearchControllSection>
                     {/* Here comes the search controlls */}
