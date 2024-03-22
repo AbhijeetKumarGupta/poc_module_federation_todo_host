@@ -9,9 +9,10 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, "dist"),
     port: 3000,
+    historyApiFallback: true,
   },
   output: {
-    publicPath: "auto",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -30,12 +31,14 @@ module.exports = {
     ],
   },
   plugins: [
+    // To learn more about the usage of this plugin, please visit https://webpack.js.org/plugins/module-federation-plugin/
     new ModuleFederationPlugin({
       name: "host",
       remotes: {
         addForm: "addForm@http://localhost:3001/remoteEntry.js",
         filterSection: "filterSection@http://localhost:3002/remoteEntry.js",
         list: "list@http://localhost:3003/remoteEntry.js",
+        details: "details@http://localhost:3004/remoteEntry.js"
       },
       shared: {"react": {singleton: true}, "react-dom": {singleton: true}},
     }),

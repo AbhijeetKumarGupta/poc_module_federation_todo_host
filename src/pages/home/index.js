@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ActionBar, AddFormSection, CardsListSection, ListTitle, MainContainer, SearchControllSection } from "./style";
-const AddForm = React.lazy(() => import("addForm/addForm"));
-const FilterForm = React.lazy(() => import("filterSection/filterSection"));
-const List = React.lazy(() => import("list/list"));
+const AddForm = React.lazy(() => import("addForm/index"));
+const FilterForm = React.lazy(() => import("filterSection/index"));
+const List = React.lazy(() => import("list/index"));
 
 const Home = () => {
     const [todoData, setTodoData] = useState([])
