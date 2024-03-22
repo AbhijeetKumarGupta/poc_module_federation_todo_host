@@ -9,6 +9,9 @@ const RoutesComp = () => {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:todoId" element={<TodoDetails />} />
+            <Route path="*" element={
+                <h1 style={{display:'flex', width:'100%', justifyContent:'center', color:'white'}}>404 Not Found</h1>
+            } />
         </Routes>
     )
 }
