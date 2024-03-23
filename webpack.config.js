@@ -12,7 +12,7 @@ module.exports = {
     historyApiFallback: true,
   },
   output: {
-    publicPath: "/",
+    publicPath: "auto",
   },
   module: {
     rules: [
@@ -35,12 +35,12 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "host",
       remotes: {
-        addForm: "addForm@http://localhost:3001/remoteEntry.js",
-        filterSection: "filterSection@http://localhost:3002/remoteEntry.js",
-        list: "list@http://localhost:3003/remoteEntry.js",
-        details: "details@http://localhost:3004/remoteEntry.js"
+        addForm: "addForm@https://abhijeetkumargupta.github.io/poc_mf_todo_remote_add_form/remoteEntry.js", //"addForm@http://localhost:3001/remoteEntry.js",
+        filterSection: "filterSection@https://abhijeetkumargupta.github.io/poc_mf_todo_remote_filter_form/remoteEntry.js", //"filterSection@http://localhost:3002/remoteEntry.js",
+        list: "list@https://abhijeetkumargupta.github.io/poc_mf_todo_remote_list/remoteEntry.js", //"list@http://localhost:3003/remoteEntry.js",
+        details: "details@https://abhijeetkumargupta.github.io/poc_mf_todo_remote_details/remoteEntry.js" //"http://localhost:3004/remoteEntry.js"
       },
-      shared: {"react": {singleton: true}, "react-dom": {singleton: true}},
+      shared: {"react": {singleton: true, eager: true}, "react-dom": {singleton: true, eager: true}},
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({

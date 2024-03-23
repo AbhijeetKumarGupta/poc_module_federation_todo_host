@@ -8,7 +8,7 @@ const TodoDetails = () => {
     const navigate = useNavigate()
 
     const handleGoBack = () => {
-        navigate("/")
+        navigate("/poc_module_federation_todo_host")
     }
 
     return (
