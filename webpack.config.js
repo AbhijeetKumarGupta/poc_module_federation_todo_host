@@ -12,7 +12,7 @@ module.exports = {
     historyApiFallback: true,
   },
   output: {
-    publicPath: "auto",
+    publicPath: "/", //auto
   },
   module: {
     rules: [
@@ -40,7 +40,7 @@ module.exports = {
         list: "list@https://abhijeetkumargupta.github.io/poc_mf_todo_remote_list/remoteEntry.js", //"list@http://localhost:3003/remoteEntry.js",
         details: "details@https://abhijeetkumargupta.github.io/poc_mf_todo_remote_details/remoteEntry.js" //"http://localhost:3004/remoteEntry.js"
       },
-      shared: {"react": {singleton: true, eager: true}, "react-dom": {singleton: true, eager: true}},
+      shared: {"react": {singleton: true}, "react-dom": {singleton: true}},
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({
