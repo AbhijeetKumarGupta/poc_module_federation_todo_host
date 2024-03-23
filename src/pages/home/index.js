@@ -9,6 +9,7 @@ const Home = () => {
     const [todoData, setTodoData] = useState([])
     const [backupTodoData, setBackupTodoData] = useState([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => { 
@@ -24,17 +25,20 @@ const Home = () => {
             });
     }, []);
   
-    const handleAdd = (e, todoTitle) => {
-        setTodoData((prev) => [
-            {
-                userId: new Date().getTime(),
-                id: new Date().getTime(),
-                title: todoTitle,
-                completed: false,
-                isDummy: true
-            },
-            ...prev
-        ])
+    const handleAdd = (e, newData) => {
+        if(newData?.title){
+            setError("")
+            setTodoData((prev) => [
+                newData,
+                ...prev
+            ])
+            setBackupTodoData((prev) => [
+                newData,
+                ...prev
+            ])
+        }else{
+            setError("Cannot create an empty todo")
+        }
         e.preventDefault()
     }
 
@@ -52,46 +56,8 @@ const Home = () => {
         e.preventDefault()
     }
 
-    const getUpdatedData = (id, value) => {
-        const updatedDoneDataTD = todoData.map(
-            (item) => {
-                if (Number(item?.id) === Number(id)) {
-                    item.completed = value
-                }
-                return item
-            }
-        )
-        const updatedDoneDataBTD = backupTodoData.map(
-            (item) => {
-                if (Number(item?.id) === Number(id)) {
-                    item.completed = value
-                }
-                return item
-            }
-        )
-        return {updatedDoneDataTD, updatedDoneDataBTD}
-    }
-
-    const handleRemove = (e) => {
-        const payload = e.target.id
-        setTodoData((prev) => prev.filter(
-            (item) => Number(item?.id) !== Number(payload)
-        ))
-        setBackupTodoData((prev) => prev.filter(
-            (item) => Number(item?.id) !== Number(payload)
-        ))
-        e.preventDefault()
-    };
-
-    const handleMarkAsDoneOrOpen = (e, value) => {
-        const {updatedDoneDataTD, updatedDoneDataBTD} = getUpdatedData(e.target.id, value)
-        setTodoData(updatedDoneDataTD)
-        setBackupTodoData(updatedDoneDataBTD)
-        e.preventDefault()
-    }
-
-    const handleView = (e) => {
-        navigate(`/${e.target.id}`)
+    const handleView = (e, url) => {
+        navigate(url)
         e.preventDefault()
     }
 
@@ -101,7 +67,7 @@ const Home = () => {
         <MainContainer>
             <ActionBar>
                 <AddFormSection>
-                    <AddForm handleAdd={handleAdd}/>
+                    <AddForm error={error} handleAdd={handleAdd}/>
                 </AddFormSection>
                 <SearchControllSection>
                     <FilterForm handleFilterApplied={handleFilterApplied}/>
@@ -112,8 +78,9 @@ const Home = () => {
                 <CardsListSection>
                     <List 
                         todoData={todoData} 
-                        handleRemove={handleRemove}
-                        handleMarkAsDoneOrOpen={handleMarkAsDoneOrOpen}
+                        setTodoData={setTodoData}
+                        backupTodoData={backupTodoData}
+                        setBackupTodoData={setBackupTodoData}
                         handleView={handleView}
                     />
                 </CardsListSection>
